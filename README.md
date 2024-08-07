@@ -1,2 +1,0 @@
-# desafio-devops
-desafio-devops

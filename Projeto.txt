@@ -1,0 +1,59 @@
+Construção do Projeto e Arquitetura
+
+Este guia fornece uma visão detalhada do funcionamento e da arquitetura do projeto, que utiliza tecnologias modernas de DevOps para automação de infraestrutura, provisionamento de hosts, automação de setup e configuração, pipeline de deploy automatizado, e monitoramento de serviços e métricas.
+
+Introdução
+O projeto foi desenvolvido com o objetivo de criar uma aplicação Flask robusta e escalável, utilizando a infraestrutura e os serviços da AWS. Para alcançar essa meta, foram utilizadas várias tecnologias e práticas recomendadas, incluindo Docker, Kubernetes, Terraform, GitHub Actions, e serviços da AWS como EKS, RDS, ECR, e CloudWatch.
+
+Arquitetura do Projeto
+A arquitetura do projeto é projetada para ser altamente escalável, resiliente e fácil de gerenciar. A seguir, são descritos os principais componentes e suas funcionalidades:
+
+VPC (Virtual Private Cloud)
+A VPC é a rede virtual que isola nossos recursos na AWS, proporcionando segurança e controle sobre o tráfego de rede. Dentro da VPC, são criadas subnets públicas e privadas, tabelas de roteamento e gateways NAT para gerenciar o acesso aos recursos.
+
+EKS (Elastic Kubernetes Service)
+O EKS é um serviço gerenciado de Kubernetes que facilita a execução de clusters Kubernetes na AWS. Ele lida com a complexidade da orquestração de contêineres, permitindo que os desenvolvedores se concentrem no desenvolvimento de aplicações. No projeto, o EKS é utilizado para gerenciar o deployment, a escalabilidade e a operação da aplicação Flask.
+
+RDS (Relational Database Service)
+O RDS é um serviço gerenciado de banco de dados que facilita a configuração, operação e escalabilidade de bancos de dados relacionais na nuvem. Utilizamos o PostgreSQL como banco de dados para a aplicação Flask, beneficiando-nos das funcionalidades de backup automático, recuperação de desastres e escalabilidade do RDS.
+
+ECR (Elastic Container Registry)
+O ECR é um serviço de registro de contêineres totalmente gerenciado que facilita o armazenamento, gerenciamento e deploy de imagens Docker. As imagens Docker da aplicação Flask são armazenadas no ECR, garantindo que estejam disponíveis para o EKS durante o processo de deployment.
+
+EC2 (Elastic Compute Cloud)
+Embora o EKS gerencie a maioria dos workloads, instâncias EC2 podem ser utilizadas para necessidades específicas, como tarefas de processamento intensivo ou serviços auxiliares que não são contêinerizados.
+
+S3 (Simple Storage Service)
+O S3 é utilizado para armazenar conteúdo estático, backups e outros dados não estruturados. A natureza altamente durável e escalável do S3 o torna ideal para essas finalidades.
+
+CloudFront
+CloudFront é uma CDN (Content Delivery Network) que distribui conteúdo estático e dinâmico com baixa latência e alta velocidade de transferência. Ele melhora a performance da aplicação ao entregar o conteúdo aos usuários de um ponto de presença (PoP) mais próximo.
+
+CloudWatch
+O CloudWatch é um serviço de monitoramento que coleta e rastreia métricas, coleta e monitora arquivos de log e define alarmes. Ele é essencial para a observabilidade da aplicação, permitindo que a equipe de DevOps monitore a saúde e o desempenho dos serviços.
+
+Pipeline de CI/CD
+Para garantir um fluxo de trabalho eficiente e minimizar o risco de erros manuais, configuramos um pipeline de CI/CD utilizando GitHub Actions. O pipeline é responsável por automatizar a construção, teste e deployment da aplicação.
+
+Integração Contínua (CI)
+A integração contínua envolve a construção e teste automáticos da aplicação cada vez que uma alteração é feita no código. Isso garante que as alterações sejam validadas continuamente, detectando erros e problemas de integração o mais cedo possível.
+
+Deploy Contínuo (CD)
+O deploy contínuo automatiza o processo de entrega das alterações aprovadas em produção. Após a validação das alterações no ambiente de staging, o pipeline realiza o deployment no ambiente de produção, garantindo que a aplicação esteja sempre atualizada.
+
+Monitoramento e Logs
+CloudWatch Logs
+Os logs da aplicação Flask são enviados para o CloudWatch Logs, onde podem ser monitorados e analisados. Isso proporciona visibilidade sobre o comportamento da aplicação, ajudando na detecção e resolução de problemas.
+
+Monitoramento de Métricas
+Além dos logs, o CloudWatch coleta métricas de desempenho dos recursos da AWS e da aplicação. Essas métricas são essenciais para monitorar a saúde do sistema, detectar anomalias e ajustar os recursos conforme necessário para otimizar a performance.
+
+Considerações Finais
+O projeto foi desenvolvido com uma abordagem centrada em DevOps, utilizando práticas e ferramentas que promovem a automação, escalabilidade e observabilidade. A arquitetura desenhada e os componentes escolhidos garantem que a aplicação Flask possa operar de forma eficiente e resiliente, proporcionando uma experiência de usuário final robusta e confiável. Com a integração de CI/CD, monitoramento contínuo e utilização de serviços gerenciados da AWS, o projeto está bem preparado para lidar com as demandas de um ambiente de produção moderno.
+
+
+
+
+
+
+
